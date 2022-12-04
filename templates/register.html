@@ -1,0 +1,63 @@
+{% extends 'masterpage.html' %}
+{% block title %}register page{% endblock title%}
+
+{% block body %}
+
+<h2>Welcome to the registration page !!!</h2></br>
+
+<h4>Enter your details to register yourself at our website </h4> </br></br>
+
+<div>
+	<form method="post" action="/register" autocomplete="off">
+		{% csrf_token %}
+
+		<label>First name </label>&nbsp;&nbsp;
+		<input id="FirstName" name="FirstName" required="" type="text" placeholder="jane" autofocus /><br><br>
+
+		<label>Last name </label>&nbsp;&nbsp;
+		<input id="LastName" name="LastName" required="" type="text" placeholder="phany" /><br><br>
+
+		Gender &nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="radio" name="gender" value="male"> Male
+		<input type="radio" name="gender" value="female"> Female
+		<input type="radio" name="gender" value="other"> Other
+		<br><br>
+
+<!-- <label>Gender</label>&nbsp;&nbsp;
+		<input id="gender" name="gender" required="" type="text" placeholder="female" /><br><br>  -->
+
+		<label>Date of birth:</label>&nbsp;&nbsp;
+		<input type="date" id="dob" name="dob" required=""><br><br>
+
+		<label>Email </label>&nbsp;&nbsp;
+		<input id="email" name="email" required="" type="email" placeholder="abc@gmail.com" /><br><br>
+
+		<label>Phone</label>&nbsp;&nbsp;
+		<input id="phone" name="phone" pattern="[0-9]{10}" type="tel" placeholder="9999922222" required=""><br><br>
+
+		<labename>Username</label>&nbsp;&nbsp;
+		<input id="username" name="username" required="" type="text" /><br><br>
+
+		<label>Password</label>&nbsp;&nbsp;
+		<input id="password" name="password" type="Password" required="" /><br><br>
+
+		<label>Re-enter password</label>&nbsp;&nbsp;
+		<input id="repassword" name="repassword" type="Password" required="" /><br><br><br>
+
+		<button id="submit"> SUBMIT </button>
+
+
+	</form>
+</div>
+
+<div>
+
+	{% if messages %}
+	{% for message in messages %}
+	<br><br>{{ message }}
+	{% endfor %}
+	{% endif %}
+
+</div>
+
+{% endblock body %}

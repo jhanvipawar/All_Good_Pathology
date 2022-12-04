@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %} {% endblock title %} | All Good Pathology</title>
+
+
+</head>
+
+<body >
+
+  <form target="_self">
+    <button  type="submit" formaction="http://127.0.0.1:8000"> Home</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button  type="submit" formaction="http://127.0.0.1:8000/register">Register</button>&nbsp;&nbsp;&nbsp;&nbsp; 
+ <button  type="submit" formaction="http://127.0.0.1:8000/login">Login</button>&nbsp;&nbsp;&nbsp;&nbsp;
+  <button type="submit" formaction="http://127.0.0.1:8000/cart">Cart</button>  <br><br>
+
+  </form>
+
+
+
+  {% block body %}{% endblock body %}
+</body>
+
+</html>
