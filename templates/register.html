@@ -1,53 +1,115 @@
 {% extends 'masterpage.html' %}
-{% block title %}register page{% endblock title%}
+{% block head %}
 
-{% block body %}
+<style> 
+	body{
+    background-image: url("static/bg3.jpg");
+    background-position: center;
+    background-size: cover;
+  }
 
-<h2>Welcome to the registration page !!!</h2></br>
+	h2{
+    text-align: center;
+		text-align-last: center;
+		color: #ffffff;
+		text-shadow: 1px 1px 3px #ababab;
+		font-family: "Verdana, sans-serif";
+  	font-size: 55px;
+  	letter-spacing: 2px;
+  	word-spacing: 1px; 
 
-<h4>Enter your details to register yourself at our website </h4> </br></br>
+	}
+	
+	h4{
+    text-align: center;
+		text-align-last: center;
+		color: #ffffff;
+    font-size: 30px;
+	}
 
-<div>
-	<form method="post" action="/register" autocomplete="off">
+</style> 
+ {% endblock head%}
+
+{% block title %}Register {% endblock title%}
+
+{% block body %} 
+
+
+</br><h2><b>Registration Page</b></h2></br>
+
+<h4>Enter your details to register at our website. </h4> </br>
+
+<div >
+	<form method="post" action="/register" autocomplete="on">
 		{% csrf_token %}
 
-		<label>First name </label>&nbsp;&nbsp;
-		<input id="FirstName" name="FirstName" required="" type="text" placeholder="jane" autofocus /><br><br>
+    <!--to make floating label center--><div class="row"><div class="col-lg-6 mx-auto">
 
-		<label>Last name </label>&nbsp;&nbsp;
-		<input id="LastName" name="LastName" required="" type="text" placeholder="phany" /><br><br>
+    <div class="form-floating mb-4  ">
+    <input class="form-control" required="" type="text"  name="FirstName" id="FirstName" placeholder="jhanvi"></input>
+    <label for="FirstName">First Name</label>
+    </div>
 
-		Gender &nbsp;&nbsp;&nbsp;&nbsp;
-		<input type="radio" name="gender" value="male"> Male
-		<input type="radio" name="gender" value="female"> Female
-		<input type="radio" name="gender" value="other"> Other
-		<br><br>
-
-<!-- <label>Gender</label>&nbsp;&nbsp;
-		<input id="gender" name="gender" required="" type="text" placeholder="female" /><br><br>  -->
-
-		<label>Date of birth:</label>&nbsp;&nbsp;
-		<input type="date" id="dob" name="dob" required=""><br><br>
-
-		<label>Email </label>&nbsp;&nbsp;
-		<input id="email" name="email" required="" type="email" placeholder="abc@gmail.com" /><br><br>
-
-		<label>Phone</label>&nbsp;&nbsp;
-		<input id="phone" name="phone" pattern="[0-9]{10}" type="tel" placeholder="9999922222" required=""><br><br>
-
-		<labename>Username</label>&nbsp;&nbsp;
-		<input id="username" name="username" required="" type="text" /><br><br>
-
-		<label>Password</label>&nbsp;&nbsp;
-		<input id="password" name="password" type="Password" required="" /><br><br>
-
-		<label>Re-enter password</label>&nbsp;&nbsp;
-		<input id="repassword" name="repassword" type="Password" required="" /><br><br><br>
-
-		<button id="submit"> SUBMIT </button>
+   <div class="form-floating mb-4 ">
+   <input class="form-control" required="" type="text" name="LastName" id="LastName" required="" placeholder="pawar"></input>
+   <label for="LastName">Last Name</label>
+  </div>
 
 
-	</form>
+	<!-- <div id='toolbar'>
+    <div class='wrapper text-center'><p><span style="color:White; font-size: 25px;">Select Gender</span></p>
+      <div class="btn-group mb-3 " role="group" aria-label="Basic radio toggle button group">
+    <input type="radio" class="btn-check btn-dark" name="gender" id="btnradio1" value="Female" >
+    <label class="btn btn-outline-primary btn-light" for="btnradio1">Female</label>
+  
+    <input type="radio" class="btn-check " name="gender" id="btnradio2" value="Male" >
+    <label class="btn btn-outline-primary btn-light" for="btnradio2">Male</label>
+  
+    <input type="radio" class="btn-check " name="gender" id="btnradio3" value="Other">
+    <label class="btn btn-outline-primary btn-light" for="btnradio3">Other</label>
+  </div> </div></div>    -->
+
+
+    <!-- <div class="form-floating mb-3 col-lg-6 mx-auto">
+    <input type="date" class="form-control" id="dob" name="dob" >
+    <label for="dob">Date of birth</label>
+  </div>  -->
+
+
+    <div class="form-floating mb-4 ">
+      <input type="email" class="form-control" id="email" required="" placeholder="jhanv@gmail.com" name="email">
+      <label for="email">Email Address</label>
+    </div>
+    
+    <div class="form-floating  mb-4 ">          <!--special case for username -->
+    <input  class="form-control" id="phone" name="phone"  pattern="[0-9]{10}" type="tel"  placeholder="9876543210">
+    <label for="phone">Phone Number</label> 
+  </div>
+
+    <!-- <div class="form-floating  mb-3 col-lg-6 mx-auto">
+    <input type="text" class="form-control" id="username" placeholder="Username" name="username" required="">
+    <label for="username">Username</label> 
+  </div>   -->
+
+		<div class="form-floating mb-4 ">
+    <input type="password" class="form-control" id="password" placeholder="Password" required="" name="password">
+    <label for="password">Password</label>
+  </div>
+
+  <div class="form-floating mb-4 ">
+  <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="repassword" required="">
+  <label for="floatingPassword">Re-enter Password</label>
+	</div>
+
+</div></div> <!--to make floating label center-->
+
+	<div class="text-center d-grid gap-3 col-4 mx-auto mb-3">
+    <button class="btn btn-primary btn-lg p-3 m-3 border-2" type="submit" value="Submit">Submit</button> 
+    </div>
+
+
+    
+  </form>
 </div>
 
 <div>

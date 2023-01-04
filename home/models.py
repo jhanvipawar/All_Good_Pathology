@@ -1,13 +1,14 @@
 from django.db import models
 
+
 # Create your models here.
 class registermodel(models.Model):
     first_name=models.CharField(max_length=50)
     last_name=models.CharField(max_length=50)
-    gender=models.CharField(max_length=50)
+    gender=models.CharField(max_length=50,null=True)
     dob= models.DateField(null=True)
     email=models.EmailField()
-    phone= models.CharField(max_length=10)
+    phone= models.CharField(max_length=50,null=True)
     username= models.CharField(max_length=150)
     password= models.CharField(max_length=150)
 

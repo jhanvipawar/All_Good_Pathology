@@ -26,11 +26,17 @@ admin.site.site_title = "Pathology Administration"
 urlpatterns = [            #adds different pages to the website
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
-    path('patientprofile/', include('home.urls')), 
+    path('profile/', include('home.urls')), 
     path('test/', include('home.urls')),
     path('cart/', include('home.urls')),
     path('register/', include('home.urls')),
-    path('login/', include('home.urls'))
+    path('login/', include('home.urls')),
+    path('homepage/', include('home.urls')),
+    path('forgetpassword/', include('home.urls')),
+    path('about/', include('home.urls')),
+    path('feedback/', include('home.urls')),
+    
+
 
 
 ]
