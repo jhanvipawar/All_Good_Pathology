@@ -1,5 +1,6 @@
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -17,6 +18,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+
 
 INSTALLED_APPS = [
     'home',
@@ -136,5 +138,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT='587'
 EMAIL_HOST_USER='allgood.pathology@gmail.com'
-EMAIL_HOST_PASSWORD='lglnxonjgrofqcxu'
+EMAIL_HOST_PASSWORD='adjxrnfdyqmtrzgq'
 EMAIL_USE_TLS=True

@@ -24,7 +24,7 @@ def register(request):
         if password==repassword:
             if FirstName.isalpha() and LastName.isalpha():
                 if User.objects.filter(username=phone).exists():
-                    messages.error(request, "phoen number already registered")
+                    messages.error(request, "Phone number already registered",extra_tags='error')
                     return render(request,'register.html')
                 else:
                     user= User.objects.create_user(first_name=FirstName,last_name=LastName,email=email,username=phone,password=password)
@@ -35,13 +35,13 @@ def register(request):
                     'allgood.pathology@gmail.com', [email], )
                     
             else:
-                messages.error(request, "first name and last name should be in letters")
+                messages.error(request, "First name & Last name should be in letters",extra_tags='error')
                 return render(request,'register.html')
 
-            messages.success(request, "Your registration is now complete !!!")
+            messages.success(request, "Your registration is now complete",extra_tags='success')
             return render(request,'register.html')
         else:
-            messages.error(request, "Password not matched")
+            messages.error(request, "Passwords not matched",extra_tags='error')
             return render(request,'register.html')                    
        
     return render(request,'register.html')
@@ -56,10 +56,9 @@ def login_p(request):
 
         if user is not None:
             auth.login(request, user)
-            messages.success(request,"done")
             return render(request,'homepage.html')
         else:
-            messages.error(request,"not done")
+            messages.error(request,"Wrong phone number or password entered",extra_tags='error')
             return render(request,'login.html')
 
     return render(request,'login.html')

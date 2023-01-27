@@ -42,11 +42,25 @@
 <div >
 	<form method="post" action="/login" autocomplete="on">
 		{% csrf_token %}
+
+		<div>
+		{% if messages %}	
+			{% for message in messages %} 
+      			{%if "error" in message.tags %}
+        			<div class="row">
+        			<div class="col-lg-5 mb-2 mx-auto">
+        			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    					<b>{{ message }}</b> 
+        			<button type="button" class="btn-close btn-lg p-1 m-3 " data-bs-dismiss="alert" aria-label="Close"></button>
+					</div></div></div> 
+      			{%endif%}
+			{% endfor %}
+		{% endif %}		
+		</div>
 		
 		
 		<div class="row">
-			<div class="col-lg-6 mx-auto">
-  
+			<div class="col-lg-6 mx-auto">  
   				<div class="form-floating mb-4 ">          <!--special case for username -->
     				<input  class="form-control" id="login_phone" name="login_phone"  pattern="[0-9]{10}" type="tel"  placeholder="9876543210">
    					<label for="login_phone">Phone Number</label> 
@@ -71,14 +85,6 @@
   </form>
 </div>
 
-<div>
 
-	{% if messages %}
-	{% for message in messages %}
-	<br><br>{{ message }}
-	{% endfor %}
-	{% endif %}
-
-</div>
 
 {% endblock body %}
