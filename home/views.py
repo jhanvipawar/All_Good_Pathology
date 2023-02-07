@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, HttpResponse
-from home.models import registermodel
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User, auth
+from math import ceil
+from .models import test,package
+
 
 def register(request):  
 
@@ -13,7 +15,7 @@ def register(request):
         LastName=request.POST.get('LastName')
         email=request.POST.get('email')
         phone= request.POST.get('phone')
-        username= request.POST.get('username')
+        #username= request.POST.get('username')
         password= request.POST.get('password')
         repassword= request.POST.get('repassword')
 
@@ -67,16 +69,31 @@ def logout_p(request):
     auth.logout(request)
     return render(request,'homepage.html')
 
-def firstpage(request):
-    return render(request,'homepage.html')
+#def homepage(request):
+    
+    #return render(request,'homepage.html')
 
-def homepage(request):
-    return render(request,'homepage.html')
+def firstpage(request):
+    tests=test.objects.all()
+    print(tests)
+    n=len(tests)
+    nslides=n//4 + ceil((n/4)-(n//4))
+    test_d={'noof_slides':nslides,'range':range(1,nslides),'mytest':tests}
+
+    packages=package.objects.all()
+    print(packages)
+    n=len(packages)
+    nslides2=n//4 + ceil((n/4)-(n//4))
+    package_d={'noof_slides':nslides2,'range':range(1,nslides2),'mypackage':packages}
+
+    list_d={**test_d,**package_d}
+
+    return render(request,'homepage.html',list_d)
     
 def profile(request):
     return render(request,'profile.html')
 
-def test(request):
+def test_page(request):
     return render(request,'test.html')    
 
 def cart(request):

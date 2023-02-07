@@ -6,7 +6,7 @@
 		background-image: url("static/bg3.jpg");
 		background-position: center;
 		background-size: cover;
-
+	
 	}
 
 	h2{
@@ -47,22 +47,20 @@
 		{% if messages %}	
 			{% for message in messages %} 
       			{%if "error" in message.tags %}
-        			<div class="row">
         			<div class="col-lg-5 mb-2 mx-auto">
         			<div class="alert alert-warning alert-dismissible fade show" role="alert">
     					<b>{{ message }}</b> 
         			<button type="button" class="btn-close btn-lg p-1 m-3 " data-bs-dismiss="alert" aria-label="Close"></button>
-					</div></div></div> 
+					</div></div> 
       			{%endif%}
 			{% endfor %}
 		{% endif %}		
 		</div>
 		
 		
-		<div class="row">
-			<div class="col-lg-6 mx-auto">  
+			<div class="col-sm-2 col-lg-6 mx-auto">  
   				<div class="form-floating mb-4 ">          <!--special case for username -->
-    				<input  class="form-control" id="login_phone" name="login_phone"  pattern="[0-9]{10}" type="tel"  placeholder="9876543210">
+    				<input  class="form-control" id="login_phone" maxlength="10" name="login_phone" pattern="\d*" pattern="[0-9]{10}" type="tel"  placeholder="9876543210">
    					<label for="login_phone">Phone Number</label> 
   				</div>
 
@@ -71,7 +69,7 @@
     				<label for="login_password">Password</label>
   				</div> 
 
-		</div></div>
+			</div>
 
 	<div class="text-center d-grid gap-3 col-4 mx-auto">
 		<button class="btn btn-primary btn-lg p-3 m-3 border-2" type="submit" value="Submit">Submit</button> 

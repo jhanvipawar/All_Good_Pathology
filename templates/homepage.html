@@ -214,8 +214,8 @@
 
   .card-body .h4card-title{
     font-family: 'Varela Round', sans-serif; 
-    font-size:29px; 
-    font-weight:500;
+    font-size:22px; 
+    font-weight:600;
   }
 
    
@@ -330,6 +330,9 @@
         }
     
     });
+
+
+
 </script>
 
 
@@ -339,13 +342,15 @@
 {% block title %}Home {% endblock title %}
 
 {% block body %}
+{% load static %}
+
 
 <!--start of carousel-->
 
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" aria-label="Slide 1" class="active" aria-current="true"></button>
-    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2" class="" aria-current="true"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="{{i}}" aria-label="Slide 2" class="" aria-current="true"></button>
     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3" class="" aria-current="true"></button>
     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4" class="" aria-current="true"></button>
     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="4" aria-label="Slide 5" class="" aria-current="true"></button>
@@ -366,8 +371,8 @@
       <div class="carousel-caption">
         <h5 class="carousel-title" style="text-shadow: 2px 1px 2px #3ec205">Finest doorstep service</h5>
         <p class="carousel-descrip" style="color:#000000;text-shadow: 0.3px 0.3px #ecfbe4;">Stay safe at your place as we get there to collect your sample.</p>
-      </div>
-    </div> 
+      </div>   
+    </div>
 
     <div class="carousel-item " data-bs-interval="3000">
       <img src="static/car2.jpg" width="800" height="500" class="d-block w-100" alt="okay"/>
@@ -412,109 +417,33 @@
 <!--start of best selling tests-->
 
 <div class="container-fluid col-sm-10 my-4">
-  <h2 class="h2forbestselltest px-2 pt-5" style="">Best Selling Test</h2>
-	<div class="row col-lx-5 mx-auto">
+  <h2 class="h2forbestselltest px-2 pt-5">Best Selling Test</h2>
+	<div class="row mx-auto">
 		<div class="MultiCarousel" data-items="1,2,3,4" data-slide="1" id="MultiCarousel" data-interval="1000">
-      <div class="MultiCarousel-inner col-lx-3 mx-auto">
+      <div class="MultiCarousel-inner col-sm-4 mx-auto">
 
-            <div class="item" onclick="location.href='/cart'">
+
+       {% for i in mytest|slice:"0:" %}
+            <div class="item col-sm-3 col-md-3">
               <div class="pad15 rounded-3">
                 <div class="card rounded-4">
                   <div class="card-body">
-                    <h3 class="card-title" style="font-size:32px">Test Name</h3>
-                    <p class="card-text" style="font-size:23px;font-weight:400">₹100</p> 
-                    <a href="/about" class="btn btn-primary">Add To Cart</a>
+                    <h3 class="card-title" style="font-size:32px">{{i.t_name}}</h3>
+                    <p class="card-text" style="font-size:23px;font-weight:400">₹{{i.t_amt}}</p>
+                    <button class="btn btn-primary cart">Add To Cart</button>
                   </div>
                 </div>
               </div>
+              {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last%}
+            </div><div class="item col-sm-3 col-md-3">
+              {% endif %}
             </div>
+              {% endfor %}
 
-              <div class="item" onclick="location.href='/cart'">
-                <div class="pad15 rounded-3">
-                  <div class="card rounded-4">
-                    <div class="card-body">
-                      <h3 class="card-title" style="font-size:32px">Test Name</h3>
-                      <p class="card-text" style="font-size:23px;font-weight:400">₹100</p> 
-                      <a href="/about" class="btn btn-primary">Add To Cart</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-                <div class="item" onclick="location.href='/cart'">
-                  <div class="pad15 rounded-3">
-                    <div class="card rounded-4">
-                      <div class="card-body">
-                        <h3 class="card-title" style="font-size:32px">Test Name</h3>
-                        <p class="card-text" style="font-size:23px;font-weight:400">₹100</p> 
-                        <a href="/about" class="btn btn-primary">Add To Cart</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                  <div class="item" onclick="location.href='/cart'">
-                    <div class="pad15 rounded-3">
-                      <div class="card rounded-4">
-                        <div class="card-body">
-                          <h3 class="card-title" style="font-size:32px">Test Name</h3>
-                          <p class="card-text" style="font-size:23px;font-weight:400">₹100</p> 
-                          <a href="/about" class="btn btn-primary">Add To Cart</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                    <div class="item" onclick="location.href='/cart'">
-                      <div class="pad15 rounded-3">
-                        <div class="card rounded-4">
-                          <div class="card-body">
-                            <h3 class="card-title" style="font-size:32px">Test Name</h3>
-                            <p class="card-text" style="font-size:23px;font-weight:400">₹100</p> 
-                            <a href="/about" class="btn btn-primary">Add To Cart</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                      <div class="item" onclick="location.href='/cart'">
-                        <div class="pad15 rounded-3">
-                          <div class="card rounded-4">
-                            <div class="card-body">
-                              <h3 class="card-title" style="font-size:32px">Test Name</h3>
-                              <p class="card-text" style="font-size:23px;font-weight:400">₹100</p> 
-                              <a href="/about" class="btn btn-primary">Add To Cart</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-            <div class="item" onclick="location.href='/cart'">
-              <div class="pad15 rounded-3">
-                <div class="card rounded-4">
-                  <div class="card-body">
-                    <h3 class="card-title" style="font-size:32px">Test Name</h3>
-                    <p class="card-text" style="font-size:23px;font-weight:400">₹100</p> 
-                    <a href="/about" class="btn btn-primary">Add To Cart</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="item" onclick="location.href='/cart'">
-              <div class="pad15 rounded-3">
-                <div class="card rounded-4">
-                  <div class="card-body">
-                    <h3 class="card-title" style="font-size:32px">Test Name</h3>
-                    <p class="card-text" style="font-size:23px;font-weight:400">₹100</p> 
-                    <a href="/about" class="btn btn-primary">Add To Cart</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-                
     </div>
 
-    <a class="leftLst carousel-control-prev " href="#MultiCarousel" data-slide="prev"> 
+    <a class="leftLst carousel-control-prev " href="#MultiCarousel" data-slide="prev">
       <i class="fa fa-angle-left"></i>
     </a>
     <a class="rightLst carousel-control-next" href="#MultiCarousel" data-slide="next">
@@ -522,22 +451,11 @@
        </a>
 
 
-      <!--<button class="leftLst carousel-control-prev" type="button" data-target="#MultiCarousel" data-slide="prev">
-        <i class="fa fa-angle-left"></i>
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      </button>
-      <button class="rightLst carousel-control-next" type="button" data-target="#MultiCarousel" data-slide="next">
-        <i class="fa fa-angle-right"></i>
-        <span class="carousel-control-next-icon"></span>
-            </button>-->
-
-
-           
-
         </div>
-	</div> 
-	
+	</div>
+
 </div>
+
 
 <!--end of best selling test-->
 
@@ -602,131 +520,27 @@
 		<div class="MultiCarousel" data-items="1,2,3,4" data-slide="1" id="MultiCarousel" data-interval="1000">
       <div class="MultiCarousel-inner col-lx-3 mx-auto">
 
-            <div class="item" onclick="location.href='/cart'">
-              <div class="pad15 rounded-3">
-                <div class="card rounded-4">
-                  <img src="static/maybe.png" height="220px" width="30px" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h4 class="h4card-title">Package Name</h4>
-                    <p style="font-size:18px">Package Description</p>
-                    <p style="font-size:22px; font-weight:400;">₹100</p>
-                    <a href="#" class="bestsellpackagebtn btn btn-primary">Add To Cart</a>
-                  </div>
-                </div>
-              </div>
-              </div>
-
+            
+              
+              {% for i in mypackage|slice:"0:" %}
               <div class="item" onclick="location.href='/cart'">
                 <div class="pad15 rounded-3">
                   <div class="card rounded-4">
-                    <img src="static/maybe.png" height="220px" width="30px" class="card-img-top" alt="...">
+                    <img src="static/maybe.png" height="220px" width="30px" class="card-img-top img-fluid" alt="...">
                     <div class="card-body">
-                      <h4 class="h4card-title">Package Name</h4>
-                      <p style="font-size:18px">Package Description</p>
-                      <p style="font-size:22px; font-weight:400;">₹100</p>
-                      <a href="#" class="bestsellpackagebtn btn btn-primary">Add To Cart</a>
+                      <h4 class="h4card-title">{{i.package_name}}</h4>
+                      <p style="font-size:18px">{{i.description|truncatechars:20}}...</p>
+                      <p style="font-size:22px; font-weight:400;">₹{{i.package_amt}}</p>
+                      <button class="btn btn-primary cart">Add To Cart</button>
                     </div>
                   </div>
                 </div>
-                </div>
-
-                <div class="item" onclick="location.href='/cart'">
-                  <div class="pad15 rounded-3">
-                    <div class="card rounded-4">
-                      <img src="static/maybe.png" height="220px" width="30px" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h4 class="h4card-title">Package Name</h4>
-                      <p style="font-size:18px">Package Description</p>
-                      <p style="font-size:22px; font-weight:400;">₹100</p>
-                      <a href="#" class="bestsellpackagebtn btn btn-primary">Add To Cart</a>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-
-                  <div class="item" onclick="location.href='/cart'">
-                    <div class="pad15 rounded-3">
-                      <div class="card rounded-4">
-                        <img src="static/maybe.png" height="220px" width="30px" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h4 class="h4card-title">Package Name</h4>
-                          <p style="font-size:18px">Package Description</p>
-                          <p style="font-size:22px; font-weight:400;">₹100</p>
-                          <a href="#" class="bestsellpackagebtn btn btn-primary">Add To Cart</a>
-                        </div>
-                      </div>
-                    </div>
-                    </div>
-
-                    <div class="item" onclick="location.href='/cart'">
-                      <div class="pad15 rounded-3">
-                        <div class="card rounded-4">
-                          <img src="static/maybe.png" height="220px" width="30px" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h4 class="h4card-title">Package Name</h4>
-                            <p style="font-size:18px">Package Description</p>
-                            <p style="font-size:22px; font-weight:400;">₹100</p>
-                            <a href="#" class="bestsellpackagebtn btn btn-primary">Add To Cart</a>
-                          </div>
-                        </div>
-                      </div>
-                      </div>
-
-                      <div class="item" onclick="location.href='/cart'">
-                        <div class="pad15 rounded-3">
-                          <div class="card rounded-4">
-                            <img src="static/maybe.png" height="220px" width="30px" class="card-img-top" alt="...">
-                            <div class="card-body">
-                              <h4 class="h4card-title">Package Name</h4>
-                              <p style="font-size:18px">Package Description</p>
-                              <p style="font-size:22px; font-weight:400;">₹100</p>
-                              <a href="#" class="bestsellpackagebtn btn btn-primary">Add To Cart</a>
-                            </div>
-                          </div>
-                        </div>
-                        </div>
-
-                        <div class="item" onclick="location.href='/cart'">
-                          <div class="pad15 rounded-3">
-                            <div class="card rounded-4">
-                              <img src="static/maybe.png" height="220px" width="30px" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <h4 class="h4card-title">Package Name</h4>
-                                <p style="font-size:18px">Package Description</p>
-                                <p style="font-size:22px; font-weight:400;">₹100</p>
-                                <a href="#" class="bestsellpackagebtn btn btn-primary">Add To Cart</a>
-                              </div>
-                            </div>
-                          </div>
-                          </div>
-
-                          <div class="item" onclick="location.href='/cart'">
-                            <div class="pad15 rounded-3">
-                              <div class="card rounded-4">
-                                <img src="static/maybe.png" height="220px" width="30px" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                  <h4 class="h4card-title">Package Name</h4>
-                                  <p style="font-size:18px">Package Description</p>
-                                  <p style="font-size:22px; font-weight:400;">₹100</p>
-                                  <a href="#" class="bestsellpackagebtn btn btn-primary">Add To Cart</a>
-                                </div>
-                              </div>
-                            </div>
-                            </div>
-
-                            <div class="item" onclick="location.href='/cart'">
-                              <div class="pad15 rounded-3">
-                                <div class="card rounded-4">
-                                  <img src="static/maybe.png" height="220px" width="30px" class="card-img-top" alt="...">
-                                  <div class="card-body">
-                                    <h4 class="h4card-title">Package Name</h4>
-                                    <p style="font-size:18px">Package Description</p>
-                                    <p style="font-size:22px; font-weight:400;">₹100</p>
-                                    <a href="#" class="bestsellpackagebtn btn btn-primary">Add To Cart</a>
-                                  </div>
-                                </div>
-                              </div>
-                              </div>
+                {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last%}
+              </div><div class="item col-sm-3 col-md-3">
+                {% endif %}
+              </div>
+                {% endfor %}
+                  
                 
     </div>
 
@@ -737,16 +551,6 @@
       <i class="fa fa-angle-right"></i>
        </a>
 
-
-      <!--<button class="leftLst carousel-control-prev" type="button" data-target="#MultiCarousel" data-slide="prev">
-        <i class="fa fa-angle-left"></i>
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      </button>
-      <button class="rightLst carousel-control-next" type="button" data-target="#MultiCarousel" data-slide="next">
-        <i class="fa fa-angle-right"></i>
-        <span class="carousel-control-next-icon"></span>
-            </button>-->
-           
 
         </div>
 	</div> 
@@ -895,5 +699,5 @@
 
 
 
-    {% endblock body %}
+{%endblock body%}
 

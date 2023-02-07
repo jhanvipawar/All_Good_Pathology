@@ -49,25 +49,23 @@
 
 			{% for message in messages %} 
       {%if "error" in message.tags %}
-        <div class="row">
-        <div class="col-lg-5 mb-2 mx-auto">
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        
-			    <b>{{ message }}</b> 
-        
-        <button type="button" class="btn-close btn-lx p-1 m-3 " data-bs-dismiss="alert" aria-label="Close"></button>
-			</div></div></div> 
+          <div class="col-lg-5 mb-2 mx-auto">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">        
+			        <b>{{ message }}</b>         
+              <button type="button" class="btn-close btn-lx p-1 m-3 " data-bs-dismiss="alert" aria-label="Close"></button>
+			      </div>
+          </div>
       {%endif%}
 			{% endfor %}
       
       {% for message in messages %} 
       {%if "success" in message.tags %}
-        <div class="row">
-        <div class="col-lg-5 mb-2 mx-auto">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-			    <b>{{ message }}</b> 
-        <button type="button" class="btn-close btn-lg p-1 m-3 " data-bs-dismiss="alert" aria-label="Close"></button>
-			</div></div></div> 
+          <div class="col-lg-5 mb-2 mx-auto">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+			        <b>{{ message }}</b> 
+              <button type="button" class="btn-close btn-lg p-1 m-3 " data-bs-dismiss="alert" aria-label="Close"></button>
+			      </div>
+          </div>
       {%endif%}
 			{% endfor %}
 
@@ -76,16 +74,18 @@
 		</div>
 
     
-    <!--to make floating label center--><div class="row"><div class="col-lg-6 mx-auto">
-    <div class="form-floating mb-4  ">
-    <input class="form-control" required="" type="text"  name="FirstName" id="FirstName" placeholder="jhanvi"></input>
-    <label for="FirstName">First Name</label>
-    </div>
+    <!--to make floating label center-->
+      <div class=" col-lg-6 mx-auto">
 
-   <div class="form-floating mb-4 ">
-   <input class="form-control" required="" type="text" name="LastName" id="LastName" required="" placeholder="pawar"></input>
-   <label for="LastName">Last Name</label>
-  </div>
+        <div class="form-floating mb-4 ">
+          <input class="form-control" required="" type="text" maxlength="50" name="FirstName" id="FirstName" placeholder="jhanvi"></input>
+          <label for="FirstName">First Name</label>
+        </div>
+
+        <div class="form-floating mb-4 ">
+          <input class="form-control" required="" type="text" maxlength="50" name="LastName" id="LastName" required="" placeholder="pawar"></input>
+          <label for="LastName">Last Name</label>
+        </div>
 
 
 	<!-- <div id='toolbar'>
@@ -109,12 +109,12 @@
 
 
     <div class="form-floating mb-4 ">
-      <input type="email" class="form-control" id="email" required="" placeholder="jhanv@gmail.com" name="email">
+      <input type="email" class="form-control" id="email" maxlength="50" required="" placeholder="jhanv@gmail.com" name="email">
       <label for="email">Email Address</label>
     </div>
     
     <div class="form-floating  mb-4 ">          <!--special case for username -->
-    <input  class="form-control" id="phone" name="phone"  pattern="[0-9]{10}" type="tel"  placeholder="9876543210">
+    <input  class="form-control" id="phone" name="phone" pattern="\d*" maxlength="10" pattern="[0-9]{10}" type="tel"  placeholder="9876543210">
     <label for="phone">Phone Number</label> 
   </div>
 
@@ -124,16 +124,15 @@
   </div>   -->
 
 		<div class="form-floating mb-4 ">
-    <input type="password" class="form-control" id="password" placeholder="Password" required="" name="password">
+    <input type="password" class="form-control" id="password" minlength="8" placeholder="Password" required="" name="password">
     <label for="password">Password</label>
   </div>
 
   <div class="form-floating mb-4 ">
-  <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="repassword" required="">
+  <input type="password" class="form-control" id="floatingPassword" minlength="8" placeholder="Password" name="repassword" required="">
   <label for="floatingPassword">Re-enter Password</label>
 	</div>
 
-</div></div> <!--to make floating label center-->
 
 	<div class="text-center d-grid gap-3 col-4 mx-auto mb-3">
     <button class="btn btn-primary btn-lg p-3 m-3 border-2" type="submit" value="Submit">Submit</button> 

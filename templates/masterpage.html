@@ -197,20 +197,20 @@
 
 
 
-  <nav class="navbar sticky-top navbar-expand-lg shadow " style="background-color: #ebf8ff;">
+  <nav class="navbar sticky-top navbar-expand-sm shadow " style="background-color: #ebf8ff;">
     <div class="container-fluid">
 
       <!-- company name -->
-      <a class="navbar-brand" href="/homepage"><img src="static/logo.png" alt="Logo" width="40" height="40"
+      <a class="navbar-brand" href="/"><img src="static/logo.png" alt="Logo" width="40" height="40"
           class="d-inline-block align-text-top" />
-        <spam style="font-family:Helvetica"><b>All Good</b></spam></a>
+        <spam style="font-family:Helvetica" ><b>All Good</b></spam></a>
 
       <!-- tabs on nav -->
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav me-auto mb-2 mb-xl-0">
 
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/homepage">
+            <a class="nav-link active" aria-current="page" href="/">
               <spam class="tabdesign">Home<spam>
             </a>
           </li>
@@ -225,7 +225,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/logout"><spam class="tabdesign">Logout<spam></a>
+            <a class="nav-link active" aria-current="page" href="/"><spam class="tabdesign">Logout<spam></a>
           </li>
           {% else %}
 
@@ -251,10 +251,12 @@
 
 
       <!-- extra button code that idk -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+      <div class="d-flex"><button class="navbar-toggler mr-auto" aria-expanded="false"
+        type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
         aria-controls="navbarTogglerDemo02" aria-label="Toggle navigation">
         <img src="static/toggle.png" alt="Logo" width="30" height="30" />
       </button>
+    </div>
 
     </div>
   </nav>

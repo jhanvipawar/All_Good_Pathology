@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from  django.contrib.auth.models  import  Group
+from django.conf import settings
+from django.conf.urls.static import static
 
 admin.site.unregister(Group) #remove group model from django admin
 
@@ -27,11 +29,11 @@ urlpatterns = [            #adds different pages to the website
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('profile/', include('home.urls')), 
-    path('test/', include('home.urls')),
+    path('test_page/', include('home.urls')),
     path('cart/', include('home.urls')),
     path('register/', include('home.urls')),
     path('login/', include('home.urls')),
-    path('homepage/', include('home.urls')),
+    #path('homepage/', include('home.urls')),
     path('forgetpassword/', include('home.urls')),
     path('about/', include('home.urls')),
     path('feedback/', include('home.urls')),
@@ -39,4 +41,4 @@ urlpatterns = [            #adds different pages to the website
 
 
 
-]
+] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
