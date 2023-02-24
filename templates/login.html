@@ -45,22 +45,35 @@
 
 		<div>
 		{% if messages %}	
+
 			{% for message in messages %} 
       			{%if "error" in message.tags %}
         			<div class="col-lg-5 mb-2 mx-auto">
-        			<div class="alert alert-warning alert-dismissible fade show" role="alert">
-    					<b>{{ message }}</b> 
-        			<button type="button" class="btn-close btn-lg p-1 m-3 " data-bs-dismiss="alert" aria-label="Close"></button>
-					</div></div> 
+        				<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    						<b>{{ message }}</b> 
+        					<button type="button" class="btn-close btn-lg p-1 m-3 " data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+					</div> 
       			{%endif%}
+			{% endfor %}
+
+			{% for message in messages %} 
+      			{%if "success" in message.tags %}
+          			<div class="col-lg-5 mb-2 mx-auto">
+           				<div class="alert alert-success alert-dismissible fade show" role="alert">
+			        		<b>{{ message }}</b> 
+              				<button type="button" class="btn-close btn-lg p-1 m-3 " data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+					</div>
+      {%endif%}
 			{% endfor %}
 		{% endif %}		
 		</div>
 		
 		
-			<div class="col-sm-2 col-lg-6 mx-auto">  
+			<div class="col-sm-6 col-lg-6 mx-auto">  
   				<div class="form-floating mb-4 ">          <!--special case for username -->
-    				<input  class="form-control" id="login_phone" maxlength="10" name="login_phone" pattern="\d*" pattern="[0-9]{10}" type="tel"  placeholder="9876543210">
+    				<input  class="form-control" id="login_phone" maxlength="10" name="login_phone" pattern="\d*" pattern="[0-9]{10}" type="number"  placeholder="9876543210">
    					<label for="login_phone">Phone Number</label> 
   				</div>
 
@@ -76,7 +89,7 @@
 	  </div>
 
 	  <div class="text-center d-grid gap-2 col-3 mx-auto mb-3">
-		<button class="btn btn-outline-light btn-md p-2 m-2 border-2" type="button" onclick="window.location.href ='/forgetpassword';">
+		<button class="btn btn-outline-light btn-lg p-2 m-2 border-2" type="button" onclick="window.location.href ='/forgetpassword';">
 			Forget Password</button>
 		  </div>
 

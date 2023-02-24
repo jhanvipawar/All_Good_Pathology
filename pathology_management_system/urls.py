@@ -19,6 +19,7 @@ from  django.contrib.auth.models  import  Group
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 admin.site.unregister(Group) #remove group model from django admin
 
 admin.site.site_header = "Pathology Admin"   #change text of django admin
@@ -29,7 +30,6 @@ urlpatterns = [            #adds different pages to the website
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('profile/', include('home.urls')), 
-    path('test_page/', include('home.urls')),
     path('cart/', include('home.urls')),
     path('register/', include('home.urls')),
     path('login/', include('home.urls')),
@@ -37,8 +37,15 @@ urlpatterns = [            #adds different pages to the website
     path('forgetpassword/', include('home.urls')),
     path('about/', include('home.urls')),
     path('feedback/', include('home.urls')),
+    path('register_a/', include('home.urls')),
+    path('login_a/', include('home.urls')),
+
+    #path('test_page/', include('home.urls')),
+    path('testpage/',include('home.urls')),
+    path('packagepage/',include('home.urls')),
     
 
 
 
-] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+] 
+

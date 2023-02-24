@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import PermissionsMixin
-
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -35,3 +35,42 @@ class package(models.Model):
     package_id= models.CharField(max_length=100,primary_key=True)
     description= models.CharField(max_length=1000)
     #img=models.ImageField(upload_to='testbooking/packageimg',default="")
+
+
+class adminmodel(models.Model):
+    first_n=models.CharField(max_length=50)
+    last_n=models.CharField(max_length=50)
+    gender=models.CharField(max_length=6)
+    dob= models.DateField()
+    email=models.EmailField()
+    phone= models.CharField(max_length=50)
+    id= models.CharField(max_length=150,primary_key=True)
+    password= models.CharField(max_length=150)
+
+"""class doctor(models.Model):
+    qualification = models.CharField(max_length=200)
+    specialization = models.CharField(max_length=200)
+    loc = models.CharField(max_length=200)
+    d_email=models.EmailField()
+    d_phone=models.IntegerField()
+    d_id= models.CharField(max_length=150,primary_key=True)
+    d_name = models.ManyToManyField('docfullname')
+
+class docfullname(models.Model):
+    first_n = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)"""
+
+
+"""class PatientList(models.Model):
+    username = models.CharField(max_length=45,null=True)
+    p_name = models.CharField(max_length=45,null=True)
+    p_age = models.IntegerField(null=True)
+    p_gender = models.CharField(max_length=45,null=True)
+
+    """
+    
+
+class Patient_List(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE,db_column='username',to_field='username')
+    p_name = models.CharField(max_length=100)
+    p_age = models.IntegerField()
