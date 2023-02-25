@@ -1,6 +1,77 @@
 {% extends 'masterpage.html' %}
 {% block head %}
 
+<!--<style>
+  .cart {
+    margin: 0 auto;
+    width: 80%;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #eee;
+  }
+  
+  input[type="number"] {
+    width: 50px;
+    text-align: center;
+  }
+  
+  select {
+    width: 150px;
+  }
+  
+  button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+</style>-->
+
+
+<script>
+
+  if(localStorage.getItem('cart') == null){                /*code for add to cart button only*/
+    var cart = {};
+
+  }
+  else{
+    cart = JSON.parse(localStorage.getItem('cart'));
+    
+  }
+  console.log(cart);
+  
+  for(item in cart){
+    let name = cart[item][1];
+    let qty= cart[item][0];
+    mystr= `<li class="list-group-item d-flex justify-content-between align-items-center">
+    ${name}<span class="badge badge-primary badge-pill">${qty}</span> </li>`
+
+    $('#items').append(mystr);
+  }
+
+</script>
+
 
 {% endblock head%}
 
@@ -8,133 +79,93 @@
 
 {% block body %}
 
-<div class="bg-light">
-    <div class="container py-5">
-      <div class="row h-100 align-items-center py-5">
-        <div class="col-lg-6">
-          <h1 class="display-4">About us page</h1>
-          <p class="lead text-muted mb-0">Create a minimal about us page using Bootstrap 4.</p>
-          <p class="lead text-muted">Snippet by <a href="https://bootstrapious.com/snippets" class="text-muted"> 
-                      <u>Bootstrapious</u></a>
-          </p>
-        </div>
-        <div class="col-lg-6 d-none d-lg-block"><img src="https://bootstrapious.com/i/snippets/sn-about/illus.png" alt="" class="img-fluid"></div>
-      </div>
-    </div>
+<h1>Enter address to proceed further</h1>
+<div class="col-sm-6 col-lg-6 mx-auto">  
+  <div class="form-floating my-5 ">
+    <input class="form-control" required="" type="text" maxlength="255" name="address" id="address" placeholder="address"></input>
+    <label for="address">Address</label>
   </div>
-  
-  <div class="bg-white py-5">
-    <div class="container py-5">
+</div>
 
-      <div class="row align-items-center mb-5">
-        <div class="col-lg-6 order-2 order-lg-1"><i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
-          <h2 class="font-weight-light">Lorem ipsum dolor sit amet</h2>
-          <p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>
-        </div>
-        <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img src="https://bootstrapious.com/i/snippets/sn-about/img-1.jpg" alt="" class="img-fluid mb-4 mb-lg-0">
-        </div>
+<h1>Display of test</h1>
+
+<div class="container">
+  <div class="col my-4">
+      <h2>Step 1 - My Awesome Cart Express Checkout - Review Your Cart Items</h2>
+      <div class="my-4">
+          <ul class="list-group" id="items">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              ${name}
+               <span class="badge badge-primary badge-pill">${qty}</span>
+               <li class="list-group-item d-flex justify-content-between align-items-center">
+                ${name}
+                 <span class="badge badge-primary badge-pill">${qty}</span>
+             </li>
+             <li class="list-group-item d-flex justify-content-between align-items-center">
+              ${name}
+               <span class="badge badge-primary badge-pill">${qty}</span>
+           </li>
+           
+           </li>
+          </ul>
       </div>
-
-      <div class="row align-items-center mb-5">
-        <div class="col-lg-5 px-5 mx-auto"><img src="https://bootstrapious.com/i/snippets/sn-about/img-2.jpg" alt="" class="img-fluid mb-4 mb-lg-0">
-        </div>
-        <div class="col-lg-6"><i class="fa fa-leaf fa-2x mb-3 text-primary"></i>
-          <h2 class="font-weight-light">Lorem ipsum dolor sit amet</h2>
-          <p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>
-        </div>
-      </div>
-
-      <div class="row align-items-center mb-5">
-        <div class="col-lg-6 order-2 order-lg-1"><i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
-          <h2 class="font-weight-light">Lorem ipsum dolor sit amet</h2>
-          <p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>
-        </div>
-        <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img src="https://bootstrapious.com/i/snippets/sn-about/img-1.jpg" alt="" class="img-fluid mb-4 mb-lg-0">
-        </div>
-      </div>
-
-      <div class="row align-items-center mb-5">
-        <div class="col-lg-5 px-5 mx-auto"><img src="https://bootstrapious.com/i/snippets/sn-about/img-2.jpg" alt="" class="img-fluid mb-4 mb-lg-0">
-        </div>
-        <div class="col-lg-6"><i class="fa fa-leaf fa-2x mb-3 text-primary"></i>
-          <h2 class="font-weight-light">Lorem ipsum dolor sit amet</h2>
-          <p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>
-        </div>
-      </div>
-
-    </div>
   </div>
-  
-  <div class="bg-light py-5">
-    <div class="container py-5">
-      <div class="row mb-4">
-        <div class="col-lg-5">
-          <h2 class="display-4 font-weight-light">Our team</h2>
-          <p class="font-italic text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        </div>
-      </div>
-  
-      <div class="row text-center">
-        <!-- Team item-->
-        <div class="col-xl-3 col-sm-6 mb-5">
-          <div class="bg-white rounded shadow-sm py-5 px-4"><img src="https://bootstrapious.com/i/snippets/sn-about/avatar-4.png" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-            <h5 class="mb-0">Manuella Nevoresky</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
-            <ul class="social mb-0 list-inline mt-3">
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-          </div>
-        </div>
-        <!-- End-->
-  
-        <!-- Team item-->
-        <div class="col-xl-3 col-sm-6 mb-5">
-          <div class="bg-white rounded shadow-sm py-5 px-4"><img src="https://bootstrapious.com/i/snippets/sn-about/avatar-3.png" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-            <h5 class="mb-0">Samuel Hardy</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
-            <ul class="social mb-0 list-inline mt-3">
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-          </div>
-        </div>
-        <!-- End-->
-  
-        <!-- Team item-->
-        <div class="col-xl-3 col-sm-6 mb-5">
-          <div class="bg-white rounded shadow-sm py-5 px-4"><img src="https://bootstrapious.com/i/snippets/sn-about/avatar-2.png" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-            <h5 class="mb-0">Tom Sunderland</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
-            <ul class="social mb-0 list-inline mt-3">
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-          </div>
-        </div>
-        <!-- End-->
-  
-        <!-- Team item-->
-        <div class="col-xl-3 col-sm-6 mb-5">
-          <div class="bg-white rounded shadow-sm py-5 px-4"><img src="https://bootstrapious.com/i/snippets/sn-about/avatar-1.png" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-            <h5 class="mb-0">John Tarly</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
-            <ul class="social mb-0 list-inline mt-3">
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
-              <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-          </div>
-        </div>
-        <!-- End-->
-  
-      </div>
-    </div>
-  </div>
-  
+</div>
+
+<!--<div class="cart">
+  <h1>Shopping Cart</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Options</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody  id="item">
+      <tr>
+        <td>Product 1</td>
+        <td><input type="number" value="1"></td>
+        <td>
+          <select>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+          </select>
+        </td>
+        <td>$19.99</td>
+      </tr>
+      <tr>
+        <td>Product 2</td>
+        <td><input type="number" value="1"></td>
+        <td>
+          <select>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+          </select>
+        </td>
+        <td>$29.99</td>
+      </tr>
+      <tr>
+        <td>Product 3</td>
+        <td><input type="number" value="1"></td>
+        <td>
+          <select>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+          </select>
+        </td>
+        <td>$39.99</td>
+      </tr>
+    </tbody>
+  </table>
+  <button>Update Cart</button>
+</div>-->
+
+
 
 {% endblock body %}
 

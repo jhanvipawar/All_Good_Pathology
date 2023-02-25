@@ -10,6 +10,7 @@
 
 {% block head %}
 
+
 <style>
   
    
@@ -82,8 +83,11 @@
         var cart = {};
       }
       else{
-        cart = JSON.parse(localStorage.getItem('cart'));      
-      }
+        cart = JSON.parse(localStorage.getItem('cart')); 
+        window.onload = function() {
+            updatecart(cart);
+          };     
+    }
   
       $(document).ready(function(){
         $('.addtocart').click(function(){
@@ -96,11 +100,45 @@
           else{
             cart[itemId]=1;
           }
+          updatecart(cart);
           console.log(cart);
-          localStorage.setItem('cart',JSON.stringify(cart));
-        });
-  
+        });  
       });
+
+
+
+      function updatecart(cart){
+        for (var item in cart) {
+          document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+        }
+        localStorage.setItem('cart',JSON.stringify(cart));
+      }
+
+
+      
+      $(document).ready(function() {
+        $(".divtest").on("click", ".minus", function() {
+          console.log("Button clicked minus wala");
+          a=this.id.slice(9, );
+          cart['test' + a] = cart['test' + a] - 1;
+          cart['test' + a] = Math.max(0, cart['test' + a]);
+          document.getElementById('valtest' + a).innerHTML = cart['test' + a];
+          updatecart(cart);  
+          console.log(cart);    
+        });
+      });
+  
+      $(document).ready(function() {
+        $(".divtest").on("click", ".plus", function() {
+          console.log("Button clicked plus wala");
+          a = this.id.slice(8, );
+          cart['test' + a] = cart['test' + a] + 1;
+          document.getElementById('valtest' + a).innerHTML = cart['test' + a];
+          updatecart(cart);
+          console.log(cart);  
+        });
+      });
+  
   </script> 
 
 {% endblock head%}
@@ -128,7 +166,8 @@
             
         </div>
         <div class="product-buttons">
-            <button id="test{{i.test_id}}" class="addtocart">Add to Cart</button>
+            <span id="divtest{{i.test_id}}" class="divtest">
+                <button id="test{{i.test_id}}" class="addtocart">Add to Cart</button>            </span>
             <button onclick="location.href='/cart'">View Cart</button>
         </div>
     </div>

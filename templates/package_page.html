@@ -82,9 +82,13 @@
  <script>
     if(localStorage.getItem('cart') == null){                /*code for add to cart button only*/
         var cart = {};
+  
       }
       else{
-        cart = JSON.parse(localStorage.getItem('cart'));      
+        cart = JSON.parse(localStorage.getItem('cart'));
+        window.onload = function() {
+          updatecart(cart);
+        };
       }
   
       $(document).ready(function(){
@@ -98,11 +102,50 @@
           else{
             cart[itemId]=1;
           }
+          updatecart(cart);
           console.log(cart);
-          localStorage.setItem('cart',JSON.stringify(cart));
         });
   
       });
+
+
+
+      function updatecart(cart){
+        for (var item in cart) {
+          document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+        }
+        localStorage.setItem('cart',JSON.stringify(cart));
+      }
+  
+  
+  
+      $(document).ready(function() {
+        $(".divpackage").on("click", ".minus", function() {
+          console.log("Button clicked minus wala");
+          a=this.id.slice(12, );
+          cart['package' + a] = cart['package' + a] - 1;
+          cart['package' + a] = Math.max(0, cart['package' + a]);
+          document.getElementById('valpackage' + a).innerHTML = cart['package' + a];
+          updatecart(cart);  
+          console.log(cart);    
+        });
+      });
+  
+      $(document).ready(function() {
+        $(".divpackage").on("click", ".plus", function() {
+          console.log("Button clicked plus wala");
+          a = this.id.slice(11, );
+          cart['package' + a] = cart['package' + a] + 1;
+          document.getElementById('valpackage' + a).innerHTML = cart['package' + a];
+          updatecart(cart);
+          console.log(cart);
+  
+        });
+      });
+   
+      
+  
+  
   </script> 
 
 {% endblock head%}
@@ -132,9 +175,12 @@
             
         </div>
         <div class="product-buttons">
-            <button id="package{{i.package_id}}" class="addtocart">Add to Cart</button>
+            <span id="divpackage{{i.package_id}}" class="divpackage">
+                <button id="package{{i.package_id}}" class="addtocart">Add to Cart</button>
+            </span>
             <button onclick="location.href='/cart'">View Cart</button>
         </div>
+        
     </div>
 </div>
 
