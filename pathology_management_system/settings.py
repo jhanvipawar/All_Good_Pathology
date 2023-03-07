@@ -1,6 +1,8 @@
 from pathlib import Path
 
 
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -60,6 +62,8 @@ TEMPLATES = [
         },
     },
 ]
+handler404 = 'home.views.error_404_view'
+handler500 = 'home.views.error_500_view'
 
 WSGI_APPLICATION = 'pathology_management_system.wsgi.application'
 
@@ -78,7 +82,10 @@ DATABASES = {
         'HOST' : '127.0.0.1',
         'PORT' : '3306',
         'USER' : 'root',
-        'PASSWORD' : 'jhanvi21',}  
+        'PASSWORD' : 'jhanvi21',
+        
+        }  
+        
 
 
    # 'default': {
@@ -143,6 +150,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT='587'
 EMAIL_HOST_USER='allgood.pathology@gmail.com'
-EMAIL_HOST_PASSWORD='adjxrnfdyqmtrzgq'
+EMAIL_HOST_PASSWORD='djhjylrblrnxdvot'
 EMAIL_USE_TLS=True
 
+TIME_ZONE = 'Asia/Kolkata'

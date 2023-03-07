@@ -1,6 +1,16 @@
+import datetime
 from django.db import models
+import pytz
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import User
+from django.conf import settings
+from django.utils import timezone
+
+
+# set timezone to IST
+settings.TIME_ZONE = 'Asia/Kolkata'
+timezone.activate(settings.TIME_ZONE)
+
 
 
 # Create your models here.
@@ -13,10 +23,6 @@ class registermodel(models.Model):
     phone= models.CharField(max_length=50,null=True)
     username= models.CharField(max_length=150)
     password= models.CharField(max_length=150)
-
-    """def __str__(self):
-        return self.username """
-    
 
 class test(models.Model):
     t_name=models.CharField(max_length=100)
@@ -34,8 +40,6 @@ class package(models.Model):
     sample= models.CharField(max_length=200)
     package_id= models.CharField(max_length=100,primary_key=True)
     description= models.CharField(max_length=1000)
-    #img=models.ImageField(upload_to='testbooking/packageimg',default="")
-
 
 class adminmodel(models.Model):
     first_n=models.CharField(max_length=50)
@@ -47,30 +51,61 @@ class adminmodel(models.Model):
     id= models.CharField(max_length=150,primary_key=True)
     password= models.CharField(max_length=150)
 
-"""class doctor(models.Model):
+class doctor(models.Model):
     qualification = models.CharField(max_length=200)
     specialization = models.CharField(max_length=200)
     loc = models.CharField(max_length=200)
-    d_email=models.EmailField()
-    d_phone=models.IntegerField()
-    d_id= models.CharField(max_length=150,primary_key=True)
-    d_name = models.ManyToManyField('docfullname')
-
-class docfullname(models.Model):
-    first_n = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)"""
-
-
-"""class PatientList(models.Model):
-    username = models.CharField(max_length=45,null=True)
-    p_name = models.CharField(max_length=45,null=True)
-    p_age = models.IntegerField(null=True)
-    p_gender = models.CharField(max_length=45,null=True)
-
-    """
-    
+    d_email=models.EmailField(null=True)
+    d_phone=models.IntegerField(null=True)
+    d_id= models.AutoField(primary_key=True)
+    d_name = models.CharField(max_length=100)
 
 class Patient_List(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE,db_column='username',to_field='username')
     p_name = models.CharField(max_length=100)
     p_age = models.IntegerField()
+
+class feedback(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE,db_column='username',to_field='username')
+    experience=models.CharField(max_length=500)
+    improvement=models.CharField(max_length=500)
+    rate=models.CharField(max_length=50)
+
+class Booking(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE,db_column='username',to_field='username',default=True)
+    listof_patient = models.ManyToManyField(Patient_List)
+    doctors = models.ManyToManyField(doctor)
+    address = models.CharField(max_length=255)
+    sch_date = models.DateField()
+    sch_time = models.CharField(max_length=255)
+    items=models.CharField(max_length=1000,default="")
+    b_date = models.DateTimeField(auto_now_add=True)
+
+
+class appointment(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE,db_column='username',to_field='username')
+    doc_name = models.CharField(max_length=255)
+    patient_name = models.CharField(max_length=255)
+    appointment_date = models.DateTimeField(auto_now_add=True)
+    sch_date = models.DateField()
+    sch_time = models.CharField(max_length=255)
+
+
+    def save(self, *args, **kwargs):
+        tz = pytz.timezone('Asia/Kolkata')  # Set timezone to IST
+        self.appointment_date = datetime.datetime.now(tz)  # Set b_date to current time in IST
+        super(appointment, self).save(*args, **kwargs)
+
+class Payment(models.Model):
+    username = models.ForeignKey(User,on_delete=models.CASCADE,db_column='username',to_field='username')
+    pay_id = models.AutoField(primary_key=True)
+
+    PAYMENT_TYPE_CHOICES = [
+        ('Online', 'Online Payment'),
+        ('Offline', 'Offline Payment'),
+    ]
+   
+    payment_type = models.CharField(max_length=7, choices=PAYMENT_TYPE_CHOICES)
+    p_date = models.DateTimeField(default=timezone.now, verbose_name='Date and Time')
+    
+

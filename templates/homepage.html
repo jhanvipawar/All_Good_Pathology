@@ -350,44 +350,57 @@
     $(document).ready(function(){
       $('.addtocart').click(function(){
         var itemId = $(this).attr('id').toString();
-        console.log(itemId);
+        console.log(itemId);        
 
         if(cart[itemId] != undefined){
           qty=cart[itemId][0]+1;
+          name = document.getElementById('name' +itemId).innerHTML;
+          cart[itemId]=[qty,name,amt];
         }
         else{
           qty=1;
           name = document.getElementById('name' +itemId).innerHTML;
+          amt = document.getElementById('amt' +itemId).innerHTML;
           //myInputName = $(this).attr('name');
-          cart[itemId]=[qty,name];
+          cart[itemId]=[qty,name,amt];
         }
         updatecart(cart);
         console.log(cart);
       });
-
     });
 
     function updatecart(cart){
       for (var item in cart) {
-        document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+        if (cart[item][0] === 0) {
+          document.getElementById('div' + item).innerHTML = "<button id='test" + item + "' class='btn btn-primary addtocart' aria-label='okay' role='presentation'>Add To Cart</button>";
+        } else {
+          document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''><b>" + cart[item][0] + "</b></span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+        }
       }
       localStorage.setItem('cart',JSON.stringify(cart));
     }
 
+    
 
     
     $(document).ready(function() {
       $(".divtest").on("click", ".minus", function() {
-        console.log("Button clicked minus wala");
         a=this.id.slice(9, );
-        cart['test' + a][0] = cart['test' + a][0] - 1;
-        cart['test' + a][0] = Math.max(0, cart['test' + a][0]);
-        document.getElementById('valtest' + a).innerHTML = cart['test' + a][0];
-        updatecart(cart);  
-        console.log(cart);    
+    var cart = JSON.parse(localStorage.getItem('cart'));
+    cart['test' + a][0] = cart['test' + a][0] - 1;
+    cart['test' + a][0] = Math.max(0, cart['test' + a][0]);
+    if (cart['test' + a][0] == 0) {
+      delete cart['test' + a];
+    }
+    updatecart(cart); 
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('valtest' + a).innerHTML = cart['test' + a][0];
+    updatecart(cart);  
+    console.log(cart); 
       });
     });
 
+    
     $(document).ready(function() {
       $(".divtest").on("click", ".plus", function() {
         console.log("Button clicked plus wala");
@@ -404,12 +417,20 @@
     $(document).ready(function() {
       $(".divpackage").on("click", ".minus", function() {
         console.log("Button clicked minus wala");
-        a=this.id.slice(12, );
+        var a=this.id.slice(12, );
+        var cart = JSON.parse(localStorage.getItem('cart'));
         cart['package' + a][0] = cart['package' + a][0] - 1;
         cart['package' + a][0] = Math.max(0, cart['package' + a][0]);
+        
+        if (cart['package' + a][0] == 0) {
+          delete cart['package' + a];
+        }
+        updatecart(cart); 
+        localStorage.setItem('cart', JSON.stringify(cart));
         document.getElementById('valpackage' + a).innerHTML = cart['package' + a][0];
+        localStorage.setItem('cart', JSON.stringify(cart));
         updatecart(cart);  
-        console.log(cart);    
+        console.log(cart);   
       });
     });
 
@@ -496,12 +517,12 @@
     </div>
 
 
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev" aria-label="okay">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next" aria-label="okay">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+      <span class="carousel-control-next-icon" ></span>
       <span class="visually-hidden">Next</span>
     </button>
 </div> 
@@ -523,14 +544,22 @@
               <div class="pad15 rounded-3">
                 <div class="card rounded-4" >
                   <div class="card-body">
-                    <div onclick="location.href='/testpage/{{i.test_id}}'">
+
+                    <!--<div onclick="location.href='/testpage/{{i.test_id}}'">-->
                       <h3 class="card-title" style="font-size:32px" id="nametest{{i.test_id}}">{{i.t_name}}</h3>
-                      <p class="card-text" style="font-size:23px;font-weight:400">₹{{i.t_amt}}</p>
-                    </div>
+                      <p class="card-text" style="font-size:23px;font-weight:400" id="amttest{{i.test_id}}">₹{{i.t_amt}}</p>
+        <!--</div>-->
                     <span id="divtest{{i.test_id}}" class="divtest">
-                      <button id="test{{i.test_id}}" class="btn btn-primary addtocart" aria-label="okay" role="presentation">Add To Cart</button>
+                      <button id="test{{i.test_id}}" class="btn btn-primary addtocart">Add To Cart</button>
                     </span>
                     
+
+
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      View
+                    </button>                   
+            
+
                   </div>
                 </div>
               </div>
@@ -538,15 +567,17 @@
             </div><div class="item col-sm-3 col-md-3">
               {% endif %}
             </div>
+
+            
               {% endfor %}
 
 
     </div>
 
-    <a class="leftLst carousel-control-prev" data-slide="prev" aria-label="okay">
+    <a class="leftLst carousel-control-prev" data-slide="prev">
       <i class="fa fa-angle-left"></i>
     </a>
-    <a class="rightLst carousel-control-next"  data-slide="next" aria-label="okay">
+    <a class="rightLst carousel-control-next"  data-slide="next">
       <i class="fa fa-angle-right"></i>
        </a>
 
@@ -555,6 +586,34 @@
 	</div>
 
 </div>
+
+{% for i in mytest%}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-size=180px">{{i.t_name}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h2 class="amt" style="font-size: 84px;color: #437293;margin: 30px 0 30px 0px;">₹{{i.t_amt}}</h2>
+        <h2 style="font-size: 47px; color: #6a757c; margin: 40px 0 20px 0px;">Gender :</h2>
+        <p style="font-size: 26px; margin: 0 0 10px 0px;">{{i.gender}}</p>
+        <h2 style="font-size: 47px; color: #6a757c; margin: 40px 0 20px 0px;">Preparation for test :</h2>
+        <p style="font-size: 26px; margin: 0 0 10px 0px;">{{i.preparation}}</p>
+        <h2 style="font-size: 47px; color: #6a757c; margin: 40px 0 20px 0px;">Sample collected :</h2>
+        <p style="font-size: 26px; margin: 0 0 10px 0px;">{{i.sample}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/cart'">View Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
 
 
 <!--end of best selling test-->
@@ -570,9 +629,9 @@
 
 			<div id="custreviewcarousel" class="carousel slide mb-5" data-ride="carousel">
 				<div class="cust carousel-indicators">
-                      <button type="button" data-target="#custreviewcarousel" data-slide-to="0" class="custreviewbtn active" aria-label="okay"></button>
-                      <button type="button" data-target="#custreviewcarousel" data-slide-to="1" class="custreviewbtn" aria-label="okay"></button>
-                      <button type="button" data-target="#custreviewcarousel" data-slide-to="2" class="custreviewbtn" aria-label="okay"></button>
+                      <button type="button" data-target="#custreviewcarousel" data-slide-to="0" class="custreviewbtn active"></button>
+                      <button type="button" data-target="#custreviewcarousel" data-slide-to="1" class="custreviewbtn"></button>
+                      <button type="button" data-target="#custreviewcarousel" data-slide-to="2" class="custreviewbtn"></button>
                     </div>
 
 
@@ -596,13 +655,13 @@
 				</div>
 				<!-- Carousel controls -->
 				
-                <button class="custreviewarrow carousel-control-prev" type="button" data-target="#custreviewcarousel" data-slide="prev" aria-label="okay">
+                <button class="custreviewarrow carousel-control-prev" type="button" data-target="#custreviewcarousel" data-slide="prev">
                     <i class="fa fa-angle-left " ></i>
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>                    
+                    <span class="carousel-control-prev-icon"></span>                    
                   </button>
-                  <button class="custreviewarrow carousel-control-next" type="button" data-target="#custreviewcarousel" data-slide="next" aria-label="okay">
+                  <button class="custreviewarrow carousel-control-next" type="button" data-target="#custreviewcarousel" data-slide="next">
 					          <i class="fa fa-angle-right"></i>
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="carousel-control-next-icon"></span>
                   </button>
 			</div>
 		</div>
@@ -628,16 +687,19 @@
                     <img src="static/maybe.png" height="220px" width="30px" class="card-img-top img-fluid" alt="ok">
                     <div class="card-body">
                       
-                      <div onclick="location.href='/packagepage/{{i.package_id}}'" >
+                      <!--<div onclick="location.href='/packagepage/{{i.package_id}}'" >-->
                         <h4 class="h4card-title" id="namepackage{{i.package_id}}">{{i.package_name}}</h4>
                         <p style="font-size:18px">{{i.description|truncatechars:20}}...</p>
-                        <p style="font-size:22px; font-weight:400;">₹{{i.package_amt}}</p>   
-                      </div>
+                        <p style="font-size:22px; font-weight:400;"  id="amtpackage{{i.package_id}}">₹{{i.package_amt}}</p>   
+                      <!--</div>-->
 
                       <span id="divpackage{{i.package_id}}" class="divpackage">
-                        <button id="package{{i.package_id}}" class="btn btn-primary addtocart" aria-label="okay">Add To Cart</button>
+                        <button id="package{{i.package_id}}" class="btn btn-primary addtocart">Add To Cart</button> 
                       </span>
-
+                      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        View
+                      </button>
+                      
                     </div>
                   </div>
                 </div>
@@ -650,10 +712,10 @@
                 
     </div>
 
-    <a class="leftLst carousel-control-prev" data-slide="prev" aria-label="okay"> 
+    <a class="leftLst carousel-control-prev" data-slide="prev"> 
       <i class="fa fa-angle-left"></i>
     </a>
-    <a class="rightLst carousel-control-next" data-slide="next" aria-label="okay">
+    <a class="rightLst carousel-control-next" data-slide="next">
       <i class="fa fa-angle-right"></i>
        </a>
 
@@ -662,6 +724,38 @@
 	</div> 
 	
 </div>
+
+
+{% for i in mypackage%}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-size=180px">{{i.package_name}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h2 class="amt" style="font-size: 84px;color: #437293;margin: 30px 0 30px 0px;">₹{{i.package_amt}}</h2>
+
+        <h2 style="font-size: 47px; color: #6a757c; margin: 40px 0 20px 0px;">Test inclued :</h2>
+        <p style="font-size: 22px; margin: 0 0 10px 0px;">{{i.description}}</p>
+        <h2 style="font-size: 47px; color: #6a757c; margin: 40px 0 20px 0px;">Gender :</h2>
+        <p style="font-size: 26px; margin: 0 0 10px 0px;">{{i.gender}}</p>
+        <h2 style="font-size: 47px; color: #6a757c; margin: 40px 0 20px 0px;">Preparation for test :</h2>
+        <p style="font-size: 26px; margin: 0 0 10px 0px;">{{i.preparation}}</p>
+        <h2 style="font-size: 47px; color: #6a757c; margin: 40px 0 20px 0px;">Sample collected :</h2>
+        <p style="font-size: 26px; margin: 0 0 10px 0px;">{{i.sample}}</p>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/cart'">View Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
 
 <!--end of best selling package-->
 
@@ -758,11 +852,11 @@
       <div class="accordion pt-4 pb-2 my-5 mx-5" id="accordionPanelsStayOpenExample">
         <div class="accordion-item">
           <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne" aria-label="okay">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
               <b>Question Number 1</b>
             </button>
           </h2>
-          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" >
             <div class="accordion-body">
               Answer 1
             </div>
@@ -771,11 +865,11 @@
 
         <div class="accordion-item">
           <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo" aria-label="okay">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo" >
               <b>Question Number 2</b>
             </button>
           </h2>
-          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" >
             <div class="accordion-body">
               Answer 2
             </div>
@@ -784,7 +878,7 @@
 
         <div class="accordion-item">
           <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree"aria-label="okay">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
               <b>Question Number 3</b>
             </button>
           </h2>
@@ -801,7 +895,16 @@
 
 <!--end of FAQ-->
 
-
+<div class="container text-center bg-light">
+  <p class="font-italic text-muted mb-0">&copy; Image copyrights to : https://donnatempo.it/dosaggi-ormonali-quando-vanno-fatti-come-leggerli-costo/ </p>
+  <p class="font-italic text-muted mb-0">&copy; Image copyrights to : https://www.scckw.com/en/ </p>
+  <p class="font-italic text-muted mb-0">&copy; Image copyrights to : https://www.ucitesting.com/drug-testing </p>
+  <p class="font-italic text-muted mb-0">&copy; Image copyrights to : http://alpharabi.com/index_en.php </p>
+  <p class="font-italic text-muted mb-0">&copy; Image copyrights to : https://www.indiacom.com/bp/dhande-laboratory_in_pune/ </p>
+  <p class="font-italic text-muted mb-0">&copy; Image copyrights to : https://www.graphicsprings.com/ </p>
+  <p class="font-italic text-muted mb-0">&copy; Image copyrights to : https://www.iconfinder.com/icons/1250954/lab_assistant_lab_technician_laboratory_medical_pathology_scientist_icon </p>
+  <p class="font-italic text-muted mb-0">&copy; Image copyrights to : https://donnatempo.it/dosaggi-ormonali-quando-vanno-fatti-come-leggerli-costo/ </p>
+</div>
 
 
 

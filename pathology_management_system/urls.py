@@ -29,7 +29,21 @@ admin.site.site_title = "Pathology Administration"
 urlpatterns = [            #adds different pages to the website
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
-    path('profile/', include('home.urls')), 
+    #path('profile/', include('home.urls')),
+    path('edit_profile/', include('home.urls')),
+    path('edit_relatives/', include('home.urls')),
+
+
+    path('relatives/', include('home.urls')), 
+
+    #path('parivar/', include('home.urls')),
+    path('plejwork/', include('home.urls')),
+    path('userprofile/', include('home.urls')),
+    path('orderhistory2/', include('home.urls')),
+    path('appointment/', include('home.urls')),
+    path('appointment_history/', include('home.urls')),
+
+
     path('cart/', include('home.urls')),
     path('register/', include('home.urls')),
     path('login/', include('home.urls')),
@@ -41,8 +55,10 @@ urlpatterns = [            #adds different pages to the website
     path('login_a/', include('home.urls')),
 
     #path('test_page/', include('home.urls')),
-    path('testpage/',include('home.urls')),
+    #path('testpage/',include('home.urls')),
     path('packagepage/',include('home.urls')),
+
+    path('', include('home.urls')),
     
 
 

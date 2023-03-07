@@ -73,12 +73,12 @@
 		
 			<div class="col-sm-6 col-lg-6 mx-auto">  
   				<div class="form-floating mb-4 ">          <!--special case for username -->
-    				<input  class="form-control" id="login_phone" maxlength="10" name="login_phone" pattern="\d*" pattern="[0-9]{10}" type="number"  placeholder="9876543210">
+    				<input class="form-control" id="login_phone" maxlength="10" name="login_phone" pattern="\d*" required="" pattern="[0-9]{10}" type="text"  placeholder="9876543210">
    					<label for="login_phone">Phone Number</label> 
   				</div>
 
 				<div class="form-floating mb-4 ">
-    				<input type="password" class="form-control" id="login_password" placeholder="Password" required="" name="login_password">
+    				<input type="password" class="form-control" id="login_password" minlength="8" placeholder="Password" required="" name="login_password">
     				<label for="login_password">Password</label>
   				</div> 
 
@@ -88,14 +88,16 @@
 		<button class="btn btn-primary btn-lg p-3 m-3 border-2" type="submit" value="Submit">Submit</button> 
 	  </div>
 
-	  <div class="text-center d-grid gap-2 col-3 mx-auto mb-3">
+	  <!--<div class="text-center d-grid gap-2 col-3 mx-auto mb-3">
 		<button class="btn btn-outline-light btn-lg p-2 m-2 border-2" type="button" onclick="window.location.href ='/forgetpassword';">
 			Forget Password</button>
-		  </div>
+		  </div>-->
 
   </form>
 </div>
 
-
+<div class="container text-center bg-dark">
+	<p class="font-italic text-muted mb-0">&copy; Image copyrights to : pinterest.com </p>
+  </div>
 
 {% endblock body %}
